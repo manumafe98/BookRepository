@@ -34,6 +34,7 @@ public class BookController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping
     public List<Book> getBooks() {
         return bookService.findAllBooks();
@@ -44,6 +45,7 @@ public class BookController {
         return bookService.findBooksByStatus(status);
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @DeleteMapping("/{id}")
     public ResponseEntity<ApiResponse> deleteBook(@PathVariable Integer id) {
         bookService.deleteBookById(id);
@@ -51,6 +53,7 @@ public class BookController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @PutMapping("/{id}")
     public Book updateBook(@RequestBody Book book, @PathVariable Integer id) {
         return bookService.updateBookById(book, id);
