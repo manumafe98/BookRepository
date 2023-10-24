@@ -40,6 +40,7 @@ public class BookController {
         return bookService.findAllBooks();
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/{status}")
     public List<Book> getBooksByStatus(@PathVariable BookStatus status) {
         return bookService.findBooksByStatus(status);

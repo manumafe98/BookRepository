@@ -4,8 +4,9 @@ import AppBar from '@mui/material/AppBar';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import IconButton from "@mui/material/IconButton";
-import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import TextField from '@mui/material/TextField';
+import { status } from '../constants/status';
 import { Container } from '@mui/system';
 
 const paperStyle = {
@@ -64,6 +65,17 @@ export default function Books() {
     })
   }
 
+  const putChange = (id, bookStatus, bookName, bookAuthor) => {
+    
+    const newBook = {bookName, bookAuthor, bookStatus}
+    
+    fetch(`http://localhost:8080/api/v1/books/${id}`, {
+      method: "PUT",
+      headers:{"Content-Type": "application/json"},
+      body:JSON.stringify(newBook)
+    })
+  }
+
   return (
     <div>
       <Container>
@@ -93,13 +105,35 @@ export default function Books() {
                 <Typography variant="body1" color="primary" style={textStyle}>
                   {book.bookAuthor}
                 </Typography>
-                <Typography variant="body1" color="primary" style={textStyle}>
-                  {book.bookStatus}
-                </Typography>
-                <IconButton>
-                  <EditIcon style={iconStyle}></EditIcon>
-                </IconButton>
-                <IconButton onClick={deleteClick(book.id)}>
+                <TextField
+                  className = "textfield"
+                  select
+                  defaultValue={book.bookStatus}
+                  SelectProps={{
+                    native: true,
+                  }}
+                  variant="standard"
+                  inputProps={
+                    { style: 
+                      { 
+                        color: "#F875AA" , 
+                        fontWeight : "bold", 
+                        background : "#FFDFDF"
+                      }
+                    }
+                  }
+                  InputProps={{ disableUnderline: true }}
+                  onChange={(e) => {
+                    putChange(book.id, e.target.value, book.bookName, book.bookAuthor)
+                  }}
+                  >
+                  {status.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                  </TextField>
+                <IconButton onClick={() => deleteClick(book.id)}>
                   <DeleteIcon style={iconStyle}></DeleteIcon>
                 </IconButton>
               </div>

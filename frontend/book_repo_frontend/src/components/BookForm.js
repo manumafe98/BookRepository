@@ -5,21 +5,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { Container } from '@mui/system';
 import { Paper } from '@mui/material';
 import Button from '@mui/material/Button';
-
-const status = [
-    {
-        value: "WANT_TO_READ",
-        label: "Want to read",
-    },
-    {
-        value: "READ",
-        label: "Read"
-    },
-    {
-        value: "READING",
-        label: "Reading"
-    }
-]
+import { status } from '../constants/status';
 
 const paperStyle = {
     background: "#AEDEFC",
@@ -44,7 +30,7 @@ const buttonStyle = {
     const[bookAuthor, setBookAuthor] = React.useState('')
     const[bookStatus, setBookStatus] = React.useState('')
 
-    const handleClick = (e) => {
+    const postClick = (e) => {
       const book={bookName, bookAuthor, bookStatus}
       
       fetch("http://localhost:8080/api/v1/books", {
@@ -103,7 +89,7 @@ const buttonStyle = {
                 </MenuItem>
               ))}
             </TextField>
-            <Button variant="contained" style={buttonStyle} onClick={handleClick}>Submit</Button>
+            <Button variant="contained" style={buttonStyle} onClick={postClick}>Submit</Button>
           </Box>
         </Paper>
       </Container>
