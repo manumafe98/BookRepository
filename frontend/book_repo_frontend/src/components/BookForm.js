@@ -33,7 +33,7 @@ const BookForm = ({ getBooks }) => {
     const postClick = (e) => {
       const book={bookName, bookAuthor, bookStatus}
       
-      fetch("http://localhost:8080/api/v1/books", {
+      fetch("http://springapi:8080/api/v1/books", {
         method:"POST",
         headers:{"Content-Type": "application/json"},
         body:JSON.stringify(book)
