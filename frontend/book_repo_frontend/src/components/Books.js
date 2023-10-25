@@ -48,33 +48,39 @@ const iconStyle = {
   color : "#F875AA",
 }
 
-export default function Books() {
+const Books = () => {
   const [books, setBooks] = useState([])
 
-  useEffect(() => {
+  const getBooks = () => {
     fetch("http://localhost:8080/api/v1/books")
-      .then(res => res.json())
-      .then(result => {
-        setBooks(result)
-      })
-  }, [])
+    .then(res => res.json())
+    .then(result => {
+      setBooks(result)
+    })
+  }
 
   const deleteClick = (id) => {
     fetch(`http://localhost:8080/api/v1/books/${id}`, {
       method:"DELETE"
+    }).then(() => {
+      getBooks()
     })
   }
 
   const putChange = (id, bookStatus, bookName, bookAuthor) => {
     
-    const newBook = {bookName, bookAuthor, bookStatus}
+    const updatedBook = {bookName, bookAuthor, bookStatus}
     
     fetch(`http://localhost:8080/api/v1/books/${id}`, {
       method: "PUT",
       headers:{"Content-Type": "application/json"},
-      body:JSON.stringify(newBook)
+      body:JSON.stringify(updatedBook)
     })
   }
+
+  useEffect(() => {
+    getBooks()
+  }, [])
 
   return (
     <div>
@@ -144,3 +150,5 @@ export default function Books() {
     </div>
   )
 }
+
+export default Books

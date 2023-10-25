@@ -18,7 +18,7 @@ const iconStyle = {
     color : "#F875AA",
 }
 
-export default function ButtonAppBar() {
+const ButtonAppBar = () => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" style={appBarStyle}>
@@ -30,5 +30,7 @@ export default function ButtonAppBar() {
         </Toolbar>
       </AppBar>
     </Box>
-  );
+  )
 }
+
+export default ButtonAppBar

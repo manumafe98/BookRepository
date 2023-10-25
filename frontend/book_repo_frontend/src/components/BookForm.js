@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
@@ -24,11 +24,11 @@ const textFieldStyle = {
 const buttonStyle = {
     background: "#F875AA",
 }
-  
-  export default function BookForm() {
-    const[bookName, setBookName] = React.useState('')
-    const[bookAuthor, setBookAuthor] = React.useState('')
-    const[bookStatus, setBookStatus] = React.useState('')
+
+const BookForm = () => {
+    const[bookName, setBookName] = useState('')
+    const[bookAuthor, setBookAuthor] = useState('')
+    const[bookStatus, setBookStatus] = useState('')
 
     const postClick = (e) => {
       const book={bookName, bookAuthor, bookStatus}
@@ -93,5 +93,7 @@ const buttonStyle = {
           </Box>
         </Paper>
       </Container>
-    );
-  }
+    )
+}
+
+export default BookForm
