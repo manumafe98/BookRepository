@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import Paper from '@mui/material/Paper';
 import AppBar from '@mui/material/AppBar';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from '@mui/icons-material/Delete';
 import TextField from '@mui/material/TextField';
+import Tab from '@mui/material/Tab';
+import Tabs from '@mui/material/Tabs'
 import { status } from '../constants/status';
 import { Container } from '@mui/system';
 
@@ -28,11 +29,7 @@ const appBarStyle = {
   marginBottom: "10px",
 }
 
-const buttonContainerStyle = {
-  display: "flex",
-}
-
-const buttonStyle = {
+const tabStyle = {
   margin: "0 10px",
   color: "#F875AA",
   fontWeight: "bold",
@@ -49,10 +46,16 @@ const iconStyle = {
 }
 
 const Books = () => {
+  const [tabIndex, setTabIndex] = useState(0)
+  const [endpointStatus, setEndpointStatus] = useState('')
   const [books, setBooks] = useState([])
 
-  const getBooks = () => {
-    fetch("http://localhost:8080/api/v1/books")
+  const handleTabChange = (event, newTabIndex) => {
+    setTabIndex(newTabIndex);
+  }
+
+  const getBooks = (status) => {
+    fetch(`http://localhost:8080/api/v1/books${status}`)
     .then(res => res.json())
     .then(result => {
       setBooks(result)
@@ -63,7 +66,7 @@ const Books = () => {
     fetch(`http://localhost:8080/api/v1/books/${id}`, {
       method:"DELETE"
     }).then(() => {
-      getBooks()
+      getBooks("")
     })
   }
 
@@ -79,28 +82,26 @@ const Books = () => {
   }
 
   useEffect(() => {
-    getBooks()
-  }, [])
+    getBooks(endpointStatus)
+  }, [endpointStatus])
 
   return (
     <div>
       <Container>
         <Paper elevation={3} style={paperStyle}>
           <AppBar position="static" style={appBarStyle}>
-            <div style={buttonContainerStyle}>
-              <Button color="secondary" style={buttonStyle}>
-                All
-              </Button>
-              <Button color="secondary" style={buttonStyle}>
-                Read
-              </Button>
-              <Button color="secondary" style={buttonStyle}>
-                Want to read
-              </Button>
-              <Button color="secondary" style={buttonStyle}>
-                Reading
-              </Button>
-            </div>
+            <Tabs
+              value={tabIndex}
+              onChange={handleTabChange}
+              sx = {{
+                '& .MuiTabs-indicator': { backgroundColor: '#F875AA' }
+              }}
+            >
+              <Tab label="All" style={tabStyle} onClick={() => setEndpointStatus("")}/>
+              <Tab label="Read" style={tabStyle} onClick={() => setEndpointStatus("/READ")}/>
+              <Tab label="Want to read" style={tabStyle} onClick={() => setEndpointStatus("/WANT_TO_READ")}/>
+              <Tab label="Reading" style={tabStyle} onClick={() => setEndpointStatus("/READING")}/>
+            </Tabs>
           </AppBar>
           {books.map((book) => (
             <AppBar position="static" style={appBarStyle} key={book.id}>
