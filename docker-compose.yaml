@@ -13,6 +13,23 @@ services:
       - "5432:5432"
     volumes:
       - pgsql:/data/postgres
+    networks:
+      - app_network
+  
+  springapi:
+    depends_on:
+      - pgsql
+    build: ./backend/book_repo
+    container_name: spring-boot-api-container
+    ports:
+      - "8080:8080"
+    networks:
+      - app_network
+
 
 volumes:
   pgsql:
+
+networks:
+  app_network:
+    name: app_network
