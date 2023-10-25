@@ -9,6 +9,7 @@ import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs'
 import { status } from '../constants/status';
 import { Container } from '@mui/system';
+import BookForm from './BookForm';
 
 const paperStyle = {
   background: "#AEDEFC",
@@ -87,6 +88,7 @@ const Books = () => {
 
   return (
     <div>
+      <BookForm getBooks={getBooks}/>
       <Container>
         <Paper elevation={3} style={paperStyle}>
           <AppBar position="static" style={appBarStyle}>

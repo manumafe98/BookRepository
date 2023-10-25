@@ -25,7 +25,7 @@ const buttonStyle = {
     background: "#F875AA",
 }
 
-const BookForm = () => {
+const BookForm = ({ getBooks }) => {
     const[bookName, setBookName] = useState('')
     const[bookAuthor, setBookAuthor] = useState('')
     const[bookStatus, setBookStatus] = useState('')
@@ -39,7 +39,10 @@ const BookForm = () => {
         body:JSON.stringify(book)
 
       }).then( ()=> {
-        console.log("New Book Added")
+        getBooks("")
+        setBookName('')
+        setBookAuthor('')
+        setBookStatus('')
       })
     }
 
