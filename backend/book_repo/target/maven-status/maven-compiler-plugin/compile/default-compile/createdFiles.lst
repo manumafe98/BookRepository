@@ -1,9 +1,11 @@
 com\manumafe\book_repo\model\ApiResponse.class
 com\manumafe\book_repo\service\BookServiceImpl.class
+com\manumafe\book_repo\model\User.class
 com\manumafe\book_repo\model\BookStatus.class
 com\manumafe\book_repo\exceptions\BookNotFoundException.class
 com\manumafe\book_repo\Main.class
 com\manumafe\book_repo\model\Book.class
 com\manumafe\book_repo\repository\BookRepository.class
 com\manumafe\book_repo\service\BookService.class
+com\manumafe\book_repo\model\UserRole.class
 com\manumafe\book_repo\controller\BookController.class

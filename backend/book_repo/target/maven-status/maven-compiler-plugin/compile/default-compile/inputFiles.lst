@@ -6,4 +6,6 @@ e:\repos\BookRepository\backend\book_repo\src\main\java\com\manumafe\book_repo\c
 e:\repos\BookRepository\backend\book_repo\src\main\java\com\manumafe\book_repo\exceptions\BookNotFoundException.java
 e:\repos\BookRepository\backend\book_repo\src\main\java\com\manumafe\book_repo\model\Book.java
 e:\repos\BookRepository\backend\book_repo\src\main\java\com\manumafe\book_repo\service\BookServiceImpl.java
+e:\repos\BookRepository\backend\book_repo\src\main\java\com\manumafe\book_repo\model\UserRole.java
+e:\repos\BookRepository\backend\book_repo\src\main\java\com\manumafe\book_repo\model\User.java
 e:\repos\BookRepository\backend\book_repo\src\main\java\com\manumafe\book_repo\repository\BookRepository.java
