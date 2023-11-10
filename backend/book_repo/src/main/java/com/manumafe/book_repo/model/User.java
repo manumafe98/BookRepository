@@ -16,8 +16,10 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import lombok.Builder;
 
 @Entity
+@Builder
 @Table(name = "users")
 public class User implements UserDetails {
 
@@ -38,17 +40,15 @@ public class User implements UserDetails {
     private UserRole role;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    private Book book;
+    private final Book book;
 
-    public User(Integer id, String fullname, String email, String password, UserRole role) {
+    public User(Integer id, String fullname, String email, String password, UserRole role, Book book) {
         this.id = id;
         this.fullname = fullname;
         this.email = email;
         this.password = password;
         this.role = role;
-    }
-
-    public User() {
+        this.book = book;
     }
 
     public Integer getId() {
@@ -93,10 +93,6 @@ public class User implements UserDetails {
 
     public Book getBook() {
         return book;
-    }
-
-    public void setBook(Book book) {
-        this.book = book;
     }
 
     @Override
