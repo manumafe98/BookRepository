@@ -1,6 +1,5 @@
 package com.manumafe.book_repo.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -11,23 +10,17 @@ import com.manumafe.book_repo.model.RegisterRequest;
 import com.manumafe.book_repo.model.User;
 import com.manumafe.book_repo.model.UserRole;
 import com.manumafe.book_repo.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 public class AuthenticationServiceImpl implements AuthenticationService {
 
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    @Autowired
-    private JwtService jwtService;
-
-    @Autowired
-    private AuthenticationManager authenticationManager;
-
-    @Override
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final JwtService jwtService;
+    private final AuthenticationManager authenticationManager;
+    
     public AuthenticationResponse register(RegisterRequest request) {
         var user = User.builder()
                 .fullname(request.getFullname())

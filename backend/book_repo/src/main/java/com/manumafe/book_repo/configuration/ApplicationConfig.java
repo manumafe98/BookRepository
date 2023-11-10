@@ -11,15 +11,13 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import com.manumafe.book_repo.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 
 @Configuration
+@RequiredArgsConstructor
 public class ApplicationConfig {
 
-    private UserRepository userRepository;
-
-    ApplicationConfig(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    private final UserRepository userRepository;
 
     @Bean
     public UserDetailsService userDetailsService() {
@@ -44,5 +42,4 @@ public class ApplicationConfig {
     public PasswordEncoder passwordEnconder() {
         return new BCryptPasswordEncoder();
     }
-
 }

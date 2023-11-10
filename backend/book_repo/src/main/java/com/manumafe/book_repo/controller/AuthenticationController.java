@@ -1,6 +1,5 @@
 package com.manumafe.book_repo.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,13 +10,14 @@ import com.manumafe.book_repo.model.AuthenticationRequest;
 import com.manumafe.book_repo.model.AuthenticationResponse;
 import com.manumafe.book_repo.model.RegisterRequest;
 import com.manumafe.book_repo.service.AuthenticationService;
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/v1/auth")
+@RequiredArgsConstructor
 public class AuthenticationController {
 
-    @Autowired
-    private AuthenticationService authenticationService;
+    private final AuthenticationService authenticationService;
     
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/register")
