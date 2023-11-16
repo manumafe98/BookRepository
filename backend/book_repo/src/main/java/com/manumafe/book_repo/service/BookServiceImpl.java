@@ -3,10 +3,12 @@ package com.manumafe.book_repo.service;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import com.manumafe.book_repo.exceptions.BookNotFoundException;
 import com.manumafe.book_repo.model.Book;
 import com.manumafe.book_repo.model.BookStatus;
+import com.manumafe.book_repo.model.User;
 import com.manumafe.book_repo.repository.BookRepository;
 
 @Service
@@ -17,17 +19,30 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Book saveBook(Book book) {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = (User) principal;
+        book.setUser(user);
+
         return bookRepository.save(book);
     }
 
     @Override
     public List<Book> findAllBooks() {
         return bookRepository.findAll();
+    }    
+
+    @Override
+    public List<Book> findAllBooksByUser() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = (User) principal;
+        return bookRepository.findByUser(user);
     }
 
     @Override
     public List<Book> findBooksByStatus(BookStatus status) {
-        return bookRepository.findByBookStatus(status);
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = (User) principal;        
+        return bookRepository.findByBookStatusAndUser(status, user);
     }
 
     @Override

@@ -34,6 +34,6 @@ public class Book {
     private BookStatus bookStatus;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_owner")
     private User user;
 }

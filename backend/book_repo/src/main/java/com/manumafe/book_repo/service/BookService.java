@@ -13,5 +13,7 @@ public interface BookService {
 
     public List<Book> findAllBooks();
 
+    public List<Book> findAllBooksByUser();
+
     public List<Book> findBooksByStatus(BookStatus satus);
 }

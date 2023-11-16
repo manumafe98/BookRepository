@@ -35,9 +35,15 @@ public class BookController {
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @GetMapping
+    @GetMapping("/users")
     public List<Book> getBooks() {
         return bookService.findAllBooks();
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping
+    public List<Book> getBooksByUser() {
+        return bookService.findAllBooksByUser();
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
