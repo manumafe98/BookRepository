@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import MenuItem from '@mui/material/MenuItem';
+import { TextField, MenuItem, Box, Paper, Button } from '@mui/material'
 import { Container } from '@mui/system';
-import { Paper } from '@mui/material';
-import Button from '@mui/material/Button';
 import { status } from '../constants/status';
 
 const paperStyle = {
