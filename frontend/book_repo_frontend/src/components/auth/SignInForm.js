@@ -4,11 +4,11 @@ import { textFieldStyle, buttonStyle } from '../../constants/styles';
 
 
 const SignInForm = () => {
-  const[username, setUsername] = useState('')
+  const[email, setEmail] = useState('')
   const[password, setPassword] = useState('')
 
   const loginUser = () => {
-    const user = {username, password}
+    const user = { email, password }
 
     fetch("http://localhost:8080/api/v1/auth/authenticate", {
       method: "POST",
@@ -32,10 +32,10 @@ const SignInForm = () => {
       >
         <TextField 
           id="outlined-basic" 
-          label="Username" 
+          label="Email" 
           variant="outlined" 
           style={textFieldStyle}
-          onChange={(e) => setUsername(e.target.value)}/>
+          onChange={(e) => setEmail(e.target.value)}/>
 
         <TextField 
           id="outlined-basic" 
