@@ -1,44 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Tab, Tabs, TextField, IconButton, Typography, AppBar, Paper } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete';
-import { status } from '../constants/status';
+import { status } from '../../constants/status';
 import { Container } from '@mui/system';
 import BookForm from './BookForm';
+import { iconStyle, tabStyle, customTextStyle, customPaperStyle, appBarStyle } from '../../constants/styles';
 
-const paperStyle = {
-  background: "#AEDEFC",
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  padding: "20px",
-  width: "1000px",
-  margin: "20px auto",
-}
-
-const appBarStyle = {
-  background: "#FFDFDF",
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  marginTop: "10px",
-  marginBottom: "10px",
-}
-
-const tabStyle = {
-  margin: "0 10px",
-  color: "#F875AA",
-  fontWeight: "bold",
-}
-
-const textStyle = {
-  color : "#F875AA",
-  fontWeight : "bold",
-  marginRight: "50px",
-}
-
-const iconStyle = {
-  color : "#F875AA",
-}
 
 const Books = () => {
   const [tabIndex, setTabIndex] = useState(0)
@@ -84,7 +51,7 @@ const Books = () => {
     <div>
       <BookForm getBooks={getBooks}/>
       <Container>
-        <Paper elevation={3} style={paperStyle}>
+        <Paper elevation={3} style={customPaperStyle}>
           <AppBar position="static" style={appBarStyle}>
             <Tabs
               value={tabIndex}
@@ -102,10 +69,10 @@ const Books = () => {
           {books.map((book) => (
             <AppBar position="static" style={appBarStyle} key={book.id}>
               <div style={{ display: "flex", alignItems: "center" }}>
-                <Typography variant="body1" color="primary" style={textStyle}>
+                <Typography variant="body1" color="primary" style={customTextStyle}>
                   {book.bookName}
                 </Typography>
-                <Typography variant="body1" color="primary" style={textStyle}>
+                <Typography variant="body1" color="primary" style={customTextStyle}>
                   {book.bookAuthor}
                 </Typography>
                 <TextField

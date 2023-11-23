@@ -1,38 +1,21 @@
 import React, { useState } from 'react';
 import { TextField, MenuItem, Box, Paper, Button } from '@mui/material'
 import { Container } from '@mui/system';
-import { status } from '../constants/status';
-
-const paperStyle = {
-    background: "#AEDEFC",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    padding: "20px",
-    width: "500px",
-    margin: "20px auto",
-  }
-
-const textFieldStyle = {
-    background: "white",
-}
-
-const buttonStyle = {
-    background: "#F875AA",
-}
+import { status } from '../../constants/status';
+import { textFieldStyle, buttonStyle, paperStyle } from '../../constants/styles';
 
 const BookForm = ({ getBooks }) => {
     const[bookName, setBookName] = useState('')
     const[bookAuthor, setBookAuthor] = useState('')
     const[bookStatus, setBookStatus] = useState('')
 
-    const postClick = (e) => {
-      const book={bookName, bookAuthor, bookStatus}
+    const postClick = () => {
+      const book = { bookName, bookAuthor, bookStatus }
       
       fetch("http://localhost:8080/api/v1/books", {
-        method:"POST",
-        headers:{"Content-Type": "application/json"},
-        body:JSON.stringify(book)
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(book)
 
       }).then( ()=> {
         getBooks("")

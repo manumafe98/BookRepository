@@ -1,15 +1,21 @@
-import React from "react";
+import React, {useState} from "react";
 import { TextField, Box, Button } from '@mui/material';
+import { textFieldStyle, buttonStyle } from '../../constants/styles';
 
-const textFieldStyle = {
-    background: "white",
-}
-
-const buttonStyle = {
-    background: "#F875AA",
-}
 
 const SignInForm = () => {
+  const[username, setUsername] = useState('')
+  const[password, setPassword] = useState('')
+
+  const loginUser = () => {
+    const user = {username, password}
+
+    fetch("http://localhost:8080/api/v1/auth/authenticate", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify.body(user)
+    })
+  }
 
     return (
         <Box component="form"
@@ -28,14 +34,17 @@ const SignInForm = () => {
           id="outlined-basic" 
           label="Username" 
           variant="outlined" 
-          style={textFieldStyle}/>
+          style={textFieldStyle}
+          onChange={(e) => setUsername(e.target.value)}/>
 
         <TextField 
           id="outlined-basic" 
-          label="Password" 
+          label="Password"
+          type="password"
           variant="outlined" 
-          style={textFieldStyle}/>
-        <Button variant="contained" style={buttonStyle}>Submit</Button>
+          style={textFieldStyle}
+          onChange={(e) => setPassword(e.target.value)}/>
+        <Button variant="contained" style={buttonStyle} onClick={loginUser}>Submit</Button>
       </Box>
     )
 }

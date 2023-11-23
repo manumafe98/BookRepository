@@ -1,24 +1,10 @@
 import React, { useState } from 'react';
 import { Box, Tab, Tabs, Paper } from '@mui/material';
-import ButtonAppBar from '../ButtonAppBar';
+import ButtonAppBar from '../main/ButtonAppBar';
 import SignInForm from './SignInForm';
 import SignUpForm from './SignUpForm';
+import { tabStyle, paperStyle } from '../../constants/styles';
 
-const paperStyle = {
-    background: "#AEDEFC",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    padding: "20px",
-    width: "500px",
-    margin: "20px auto",
-}
-
-const tabStyle = {
-    margin: "0 10px",
-    color: "#F875AA",
-    fontWeight: "bold",
-}
 
 const Auth = () => {
     const [tabIndex, setTabIndex] = useState(0);
