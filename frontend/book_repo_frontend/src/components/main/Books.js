@@ -5,6 +5,7 @@ import { status } from '../../constants/status';
 import { Container } from '@mui/system';
 import BookForm from './BookForm';
 import { iconStyle, tabStyle, customTextStyle, customPaperStyle, appBarStyle } from '../../constants/styles';
+import ButtonAppBar from '../ButtonAppBar';
 
 
 const Books = () => {
@@ -49,6 +50,7 @@ const Books = () => {
 
   return (
     <div>
+      <ButtonAppBar/>
       <BookForm getBooks={getBooks}/>
       <Container>
         <Paper elevation={3} style={customPaperStyle}>

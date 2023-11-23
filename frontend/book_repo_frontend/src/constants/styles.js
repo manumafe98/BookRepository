@@ -55,3 +55,9 @@ export const appBarStyle = {
     marginTop: "10px",
     marginBottom: "10px",
 }
+
+export const textStyleAppbar = {
+    ...textStyle,
+    flexGrow: 1,
+    textAlign: "center",
+}

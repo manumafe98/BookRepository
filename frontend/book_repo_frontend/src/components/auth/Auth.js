@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Box, Tab, Tabs, Paper } from '@mui/material';
-import ButtonAppBar from '../main/ButtonAppBar';
+import ButtonAppBar from '../ButtonAppBar';
 import SignInForm from './SignInForm';
 import SignUpForm from './SignUpForm';
 import { tabStyle, paperStyle } from '../../constants/styles';
