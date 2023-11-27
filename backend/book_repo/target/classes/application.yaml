@@ -3,7 +3,7 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/book_repo
+    url: jdbc:postgresql://pgsql:5432/book_repo
     username: manumafe
     password: password
   jpa:
