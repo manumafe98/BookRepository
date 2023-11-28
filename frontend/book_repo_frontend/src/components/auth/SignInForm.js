@@ -21,13 +21,13 @@ const SignInForm = () => {
 
     fetch("http://localhost:8080/api/v1/auth/authenticate", {
       method: "POST",
-      headers: {"Content-Type": "application/json"},
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(user)
     }).then(response => response.json())
     .then(data => {
       const jwt_token = data.token
       setLoggedIn(true)
-      cookies.set("jwt_authorization", jwt_token)
+      cookies.set("jwt_authorization", jwt_token, {path: '/main'})
       navigate('/main')
     })
   }
