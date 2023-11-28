@@ -20,11 +20,11 @@ import com.manumafe.book_repo.service.BookService;
 
 @RestController
 @RequestMapping("/api/v1/books")
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true", allowedHeaders = {"Content-Type", "Authorization"})
 public class BookController {
     @Autowired
     private BookService bookService;
 
-    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping
     public ResponseEntity<ApiResponse> createBook(@RequestBody Book book) {
         bookService.saveBook(book);
@@ -34,25 +34,21 @@ public class BookController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/users")
     public List<Book> getBooks() {
         return bookService.findAllBooks();
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping
     public List<Book> getBooksByUser() {
         return bookService.findAllBooksByUser();
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/{status}")
     public List<Book> getBooksByStatus(@PathVariable BookStatus status) {
         return bookService.findBooksByStatus(status);
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
     @DeleteMapping("/{id}")
     public ResponseEntity<ApiResponse> deleteBook(@PathVariable Integer id) {
         bookService.deleteBookById(id);
@@ -60,7 +56,6 @@ public class BookController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
     @PutMapping("/{id}")
     public Book updateBook(@RequestBody Book book, @PathVariable Integer id) {
         return bookService.updateBookById(book, id);

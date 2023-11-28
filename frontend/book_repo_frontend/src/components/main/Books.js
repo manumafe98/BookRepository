@@ -6,19 +6,23 @@ import { Container } from '@mui/system';
 import BookForm from './BookForm';
 import { iconStyle, tabStyle, customTextStyle, customPaperStyle, appBarStyle } from '../../constants/styles';
 import ButtonAppBar from '../ButtonAppBar';
-
+import Cookies from 'universal-cookie';
 
 const Books = () => {
   const [tabIndex, setTabIndex] = useState(0)
   const [endpointStatus, setEndpointStatus] = useState('')
   const [books, setBooks] = useState([])
+  const cookies = new Cookies()
 
   const handleTabChange = (event, newTabIndex) => {
     setTabIndex(newTabIndex);
   }
 
   const getBooks = (status) => {
-    fetch(`http://localhost:8080/api/v1/books${status}`)
+    fetch(`http://localhost:8080/api/v1/books${status}`, {
+      method: "GET",
+      headers: { "Authorization": `Bearer ${cookies.get("jwt_authorization")}` }
+    })
     .then(res => res.json())
     .then(result => {
       setBooks(result)
