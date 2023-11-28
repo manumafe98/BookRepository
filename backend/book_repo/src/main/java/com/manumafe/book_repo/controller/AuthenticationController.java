@@ -15,7 +15,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true", allowedHeaders = {"Content-Type", "Authorization"})
+@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = {"Content-Type"})
 public class AuthenticationController {
 
     private final AuthenticationService authenticationService;

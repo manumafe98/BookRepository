@@ -6,10 +6,10 @@ import Cookies from 'universal-cookie';
 
 
 const SignInForm = () => {
-  const[loggedIn, setLoggedIn] = useState(false)
+  const[_loggedIn, setLoggedIn] = useState(false)
   const[email, setEmail] = useState('')
   const[password, setPassword] = useState('')
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   const cookies = new Cookies()
 
   const logoutUser = () => {
