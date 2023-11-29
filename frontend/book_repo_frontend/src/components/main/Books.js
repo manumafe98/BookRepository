@@ -31,7 +31,8 @@ const Books = () => {
 
   const deleteClick = (id) => {
     fetch(`/api/v1/books/${id}`, {
-      method:"DELETE"
+      method:"DELETE",
+      headers: { "Authorization": `Bearer ${cookies.get("jwt_authorization")}` }
     }).then(() => {
       getBooks("")
     })
@@ -43,7 +44,10 @@ const Books = () => {
     
     fetch(`/api/v1/books/${id}`, {
       method: "PUT",
-      headers: { "Content-Type": "application/json" },
+      headers: { 
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${cookies.get("jwt_authorization")}` 
+      },
       body:JSON.stringify(updatedBook)
     })
   }

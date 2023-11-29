@@ -1,20 +1,16 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { TextField, Box, Button } from '@mui/material';
 import { textFieldStyle, buttonStyle } from '../../constants/styles';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'universal-cookie';
+import { jwtDecode } from "jwt-decode";
 
 
 const SignInForm = () => {
-  const[_loggedIn, setLoggedIn] = useState(false)
   const[email, setEmail] = useState('')
   const[password, setPassword] = useState('')
   const navigate = useNavigate()
   const cookies = new Cookies()
-
-  const logoutUser = () => {
-    cookies.remove("jwt_authorization")
-  }
 
   const loginUser = () => {
     const user = { email, password }
@@ -26,9 +22,12 @@ const SignInForm = () => {
     }).then(response => response.json())
     .then(data => {
       const jwt_token = data.token
-      setLoggedIn(true)
+      const decoded = jwtDecode(jwt_token)
+
       cookies.set("jwt_authorization", jwt_token, {path: '/main'})
+      localStorage.setItem("user", JSON.stringify(decoded))
       navigate('/main')
+      window.location.reload()
     })
   }
 

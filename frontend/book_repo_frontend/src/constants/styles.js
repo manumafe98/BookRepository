@@ -7,7 +7,7 @@ export const buttonStyle = {
 }
 
 export const iconStyle = {
-    color : "#F875AA",
+    color: "#F875AA",
 }
 
 export const tabStyle = {
