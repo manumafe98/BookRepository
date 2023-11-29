@@ -14,7 +14,7 @@ const BookForm = ({ getBooks }) => {
     const postClick = () => {
       const book = { bookName, bookAuthor, bookStatus }
       
-      fetch("http://localhost:8080/api/v1/books", {
+      fetch("/api/v1/books", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

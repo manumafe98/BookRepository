@@ -19,7 +19,7 @@ const Books = () => {
   }
 
   const getBooks = (status) => {
-    fetch(`http://localhost:8080/api/v1/books${status}`, {
+    fetch(`/api/v1/books${status}`, {
       method: "GET",
       headers: { "Authorization": `Bearer ${cookies.get("jwt_authorization")}` }
     })
@@ -30,7 +30,7 @@ const Books = () => {
   }
 
   const deleteClick = (id) => {
-    fetch(`http://localhost:8080/api/v1/books/${id}`, {
+    fetch(`/api/v1/books/${id}`, {
       method:"DELETE"
     }).then(() => {
       getBooks("")
@@ -41,7 +41,7 @@ const Books = () => {
     
     const updatedBook = {bookName, bookAuthor, bookStatus}
     
-    fetch(`http://localhost:8080/api/v1/books/${id}`, {
+    fetch(`/api/v1/books/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body:JSON.stringify(updatedBook)
