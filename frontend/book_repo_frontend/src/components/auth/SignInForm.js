@@ -19,7 +19,8 @@ const SignInForm = () => {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(user)
-    }).then(response => response.json())
+    })
+    .then(response => response.json())
     .then(data => {
       const jwt_token = data.token
       const decoded = jwtDecode(jwt_token)
