@@ -2,6 +2,7 @@ com\manumafe\book_repo\service\AuthenticationServiceImpl.class
 com\manumafe\book_repo\model\ApiResponse.class
 com\manumafe\book_repo\service\BookServiceImpl.class
 com\manumafe\book_repo\controller\AuthenticationController.class
+com\manumafe\book_repo\exceptions\RegistrationException.class
 com\manumafe\book_repo\exceptions\BookNotFoundException.class
 com\manumafe\book_repo\repository\UserRepository.class
 com\manumafe\book_repo\model\AuthenticationResponse.class
@@ -21,6 +22,7 @@ com\manumafe\book_repo\model\BookStatus.class
 com\manumafe\book_repo\model\RegisterRequest$RegisterRequestBuilder.class
 com\manumafe\book_repo\configuration\JwtAuthenticationFilter.class
 com\manumafe\book_repo\model\AuthenticationRequest.class
+com\manumafe\book_repo\exceptions\LoginException.class
 com\manumafe\book_repo\Main.class
 com\manumafe\book_repo\model\Book.class
 com\manumafe\book_repo\configuration\SecurityConfiguration.class

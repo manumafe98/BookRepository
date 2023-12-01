@@ -1,9 +1,13 @@
 package com.manumafe.book_repo.service;
 
+import java.util.Optional;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import com.manumafe.book_repo.exceptions.LoginException;
+import com.manumafe.book_repo.exceptions.RegistrationException;
 import com.manumafe.book_repo.model.AuthenticationRequest;
 import com.manumafe.book_repo.model.AuthenticationResponse;
 import com.manumafe.book_repo.model.RegisterRequest;
@@ -29,6 +33,10 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .role(UserRole.USER)
                 .build();
 
+        Optional<User> checkUseruser = userRepository.findByEmail(request.getEmail());
+        
+        if (checkUseruser.isPresent()) throw new RegistrationException("Email is already taken");
+
         userRepository.save(user);
 
         var jwtToken = jwtService.generateToken(user);
@@ -39,12 +47,19 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
-        authenticationManager.authenticate(
-            new UsernamePasswordAuthenticationToken(
-                request.getEmail(), 
-                request.getPassword())
-        );
-        var user = userRepository.findByEmail(request.getEmail()).orElseThrow();
+
+        var user = userRepository.findByEmail(request.getEmail()).orElseThrow(() -> new LoginException("User not registered"));
+
+        try {
+            authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                    request.getEmail(), 
+                    request.getPassword())
+            );
+        } catch (Exception e) {
+            throw new LoginException("Incorrect Password");
+        }
+        
         var jwtToken = jwtService.generateToken(user);
         
         return AuthenticationResponse.builder()

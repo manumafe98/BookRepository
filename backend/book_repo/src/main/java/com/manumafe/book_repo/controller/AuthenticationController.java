@@ -1,12 +1,14 @@
 package com.manumafe.book_repo.controller;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.manumafe.book_repo.exceptions.LoginException;
+import com.manumafe.book_repo.exceptions.RegistrationException;
 import com.manumafe.book_repo.model.AuthenticationRequest;
-import com.manumafe.book_repo.model.AuthenticationResponse;
 import com.manumafe.book_repo.model.RegisterRequest;
 import com.manumafe.book_repo.service.AuthenticationService;
 import lombok.RequiredArgsConstructor;
@@ -17,14 +19,22 @@ import lombok.RequiredArgsConstructor;
 public class AuthenticationController {
 
     private final AuthenticationService authenticationService;
-    
+
     @PostMapping("/register")
-    public ResponseEntity<AuthenticationResponse> register(@RequestBody RegisterRequest request) {
-        return ResponseEntity.ok(authenticationService.register(request));
+    public ResponseEntity<?> register(@RequestBody RegisterRequest request) {
+        try {
+            return ResponseEntity.ok(authenticationService.register(request));
+        } catch (RegistrationException e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+        }
     }
 
     @PostMapping("/authenticate")
-    public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest request) {
-        return ResponseEntity.ok(authenticationService.authenticate(request));
+    public ResponseEntity<?> authenticate(@RequestBody AuthenticationRequest request) {
+        try {
+            return ResponseEntity.ok(authenticationService.authenticate(request));
+        } catch (LoginException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
+        }
     }
 }
