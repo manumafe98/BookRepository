@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { TextField, Box, Button } from '@mui/material';
+import { TextField, Box, Button, Typography } from '@mui/material';
 import { textFieldStyle, buttonStyle } from "../../constants/styles";
 
 
@@ -7,6 +7,7 @@ const SignUpForm = () => {
   const[fullname, setFullname] = useState('')
   const[email, setEmail] = useState('')
   const[password, setPassword] = useState('')
+  const[invalidRegistration, setInvalidRegistration] = useState(false)
 
   const registerUser = () => {
     const user = { fullname, email, password }
@@ -15,6 +16,10 @@ const SignUpForm = () => {
       method: "POST",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify(user)
+    })
+    .then(response => response.json())
+    .catch(error => {
+      console.log(error)
     })
   }
 
@@ -54,6 +59,7 @@ const SignUpForm = () => {
           style={textFieldStyle}
           onChange={(e) => setPassword(e.target.value)}/>
         <Button variant="contained" style={buttonStyle} onClick={registerUser}>Submit</Button>
+        { invalidRegistration && <Typography variant="string">The email is already in use, try again</Typography> }
       </Box>
     )
 }

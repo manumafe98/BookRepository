@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.manumafe.book_repo.exceptions.LoginException;
 import com.manumafe.book_repo.exceptions.RegistrationException;
+import com.manumafe.book_repo.model.ApiResponse;
 import com.manumafe.book_repo.model.AuthenticationRequest;
 import com.manumafe.book_repo.model.RegisterRequest;
 import com.manumafe.book_repo.service.AuthenticationService;
@@ -25,7 +26,8 @@ public class AuthenticationController {
         try {
             return ResponseEntity.ok(authenticationService.register(request));
         } catch (RegistrationException e) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+            ApiResponse apiResponse = e.getApiResponse();
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(apiResponse.getMessage());
         }
     }
 
@@ -34,7 +36,8 @@ public class AuthenticationController {
         try {
             return ResponseEntity.ok(authenticationService.authenticate(request));
         } catch (LoginException e) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
+            ApiResponse apiResponse = e.getApiResponse();
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(apiResponse.getMessage());
         }
     }
 }
