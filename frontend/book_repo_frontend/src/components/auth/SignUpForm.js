@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { TextField, Box, Button, Typography } from '@mui/material';
-import { textFieldStyle, buttonStyle } from "../../constants/styles";
+import { textFieldStyle, buttonStyle, textStyle } from "../../constants/styles";
 
 
 const SignUpForm = () => {
@@ -17,9 +17,10 @@ const SignUpForm = () => {
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify(user)
     })
-    .then(response => response.json())
-    .catch(error => {
-      console.log(error)
+    .then(response => {
+      if (!response.ok) {
+        setInvalidRegistration(true)
+      }
     })
   }
 
@@ -59,7 +60,7 @@ const SignUpForm = () => {
           style={textFieldStyle}
           onChange={(e) => setPassword(e.target.value)}/>
         <Button variant="contained" style={buttonStyle} onClick={registerUser}>Submit</Button>
-        { invalidRegistration && <Typography variant="string">The email is already in use, try again</Typography> }
+        { invalidRegistration && <Typography variant="string" style={textStyle}>The email is already in use, try again</Typography> }
       </Box>
     )
 }
