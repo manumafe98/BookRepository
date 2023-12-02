@@ -1,4 +1,3 @@
-e:\repos\BookRepository\backend\book_repo\src\main\java\com\manumafe\book_repo\exceptions\LoginException.java
 e:\repos\BookRepository\backend\book_repo\src\main\java\com\manumafe\book_repo\model\BookStatus.java
 e:\repos\BookRepository\backend\book_repo\src\main\java\com\manumafe\book_repo\configuration\ApplicationConfig.java
 e:\repos\BookRepository\backend\book_repo\src\main\java\com\manumafe\book_repo\model\ApiResponse.java
@@ -7,7 +6,6 @@ e:\repos\BookRepository\backend\book_repo\src\main\java\com\manumafe\book_repo\m
 e:\repos\BookRepository\backend\book_repo\src\main\java\com\manumafe\book_repo\configuration\JwtAuthenticationFilter.java
 e:\repos\BookRepository\backend\book_repo\src\main\java\com\manumafe\book_repo\model\User.java
 e:\repos\BookRepository\backend\book_repo\src\main\java\com\manumafe\book_repo\controller\AuthenticationController.java
-e:\repos\BookRepository\backend\book_repo\src\main\java\com\manumafe\book_repo\exceptions\RegistrationException.java
 e:\repos\BookRepository\backend\book_repo\src\main\java\com\manumafe\book_repo\repository\BookRepository.java
 e:\repos\BookRepository\backend\book_repo\src\main\java\com\manumafe\book_repo\service\AuthenticationService.java
 e:\repos\BookRepository\backend\book_repo\src\main\java\com\manumafe\book_repo\service\BookService.java

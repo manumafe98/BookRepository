@@ -5,9 +5,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import com.manumafe.book_repo.exceptions.LoginException;
-import com.manumafe.book_repo.exceptions.RegistrationException;
 import com.manumafe.book_repo.model.AuthenticationRequest;
 import com.manumafe.book_repo.model.AuthenticationResponse;
 import com.manumafe.book_repo.model.RegisterRequest;
@@ -24,7 +21,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
-    
+
     public AuthenticationResponse register(RegisterRequest request) {
         var user = User.builder()
                 .fullname(request.getFullname())
@@ -34,36 +31,48 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .build();
 
         Optional<User> checkUseruser = userRepository.findByEmail(request.getEmail());
-        
-        if (checkUseruser.isPresent()) throw new RegistrationException("Email is already taken");
+
+        if (checkUseruser.isPresent()) {
+            return AuthenticationResponse.builder()
+                    .status(AuthenticationResponse.AuthenticationStatus.EMAIL_ALREADY_REGISTERED)
+                    .build();
+        }
 
         userRepository.save(user);
 
         var jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder()
                 .token(jwtToken)
+                .status(AuthenticationResponse.AuthenticationStatus.SUCCESS)
                 .build();
     }
 
     @Override
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
 
-        var user = userRepository.findByEmail(request.getEmail()).orElseThrow(() -> new LoginException("User not registered"));
+        Optional<User> user = userRepository.findByEmail(request.getEmail());
+        if (!user.isPresent()) {
+            return AuthenticationResponse.builder()
+                    .status(AuthenticationResponse.AuthenticationStatus.USER_NOT_REGISTERED)
+                    .build();
+        }
 
         try {
             authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                    request.getEmail(), 
-                    request.getPassword())
-            );
+                    new UsernamePasswordAuthenticationToken(
+                            request.getEmail(),
+                            request.getPassword()));
         } catch (Exception e) {
-            throw new LoginException("Incorrect Password");
+            return AuthenticationResponse.builder()
+                    .status(AuthenticationResponse.AuthenticationStatus.INCORRECT_PASSWORD)
+                    .build();
         }
-        
-        var jwtToken = jwtService.generateToken(user);
-        
+
+        var jwtToken = jwtService.generateToken(user.get());
+
         return AuthenticationResponse.builder()
                 .token(jwtToken)
+                .status(AuthenticationResponse.AuthenticationStatus.SUCCESS)
                 .build();
     }
 }

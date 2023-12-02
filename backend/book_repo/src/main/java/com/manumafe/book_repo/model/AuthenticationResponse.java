@@ -12,4 +12,12 @@ import lombok.NoArgsConstructor;
 public class AuthenticationResponse {
 
     private String token;
+    private AuthenticationStatus status;
+
+    public enum AuthenticationStatus {
+        SUCCESS,
+        INCORRECT_PASSWORD,
+        USER_NOT_REGISTERED,
+        EMAIL_ALREADY_REGISTERED,
+    }
 }
